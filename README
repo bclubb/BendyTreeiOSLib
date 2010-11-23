@@ -1,0 +1,52 @@
+This is the source code for my obj-c library.  It's got a bunch of random things that make iOS development easier.  Check out http://www.bendytree.com for more info or email me at help@bendytree.com
+
+JSON
+
+For most people, the most interesting thing in here is the "BTJSON" library which is an extension of the "json-framework" (see http://code.google.com/p/json-framework/).
+
+The JSON framework lets you serialize/deserialize NSDictionary to/from JSON.  This library is soooo helpful when dealing with rest apis and even storing data locally.
+
+Unfortunately, the json-framework deals only with NSDictionary so you can't serialize any arbitrary object.  Likewise, when you deserialize the resulting object is not a custom type - it is an NSDictionary.
+
+BTJSON, which is part of the Bendy Tree Library, extends this framework to serialize & deserialize any arbitrary objects - so long as you follow some standards.
+
+Serialization Example:
+
+    ProductModel* product = [[[ProductModel alloc] init] autorelease];
+    product.Id = 346782;
+    product.Name = @"Night Vision Goggles";
+    product.CreatedOn = [NSDate date];
+    product.Categories = [NSArray arrayWithObject:[[[CategoryModel alloc] init] autorelease]];
+
+    NSString* json = [product serialize];
+    NSLog(@"json = %@", json);  
+    
+    //json = {Id:346782,Name:"Night Vision Goggles",CreatedOn:"/Date(1290534982)/",Categories:[{Id:1}]}
+
+Deserialization Example:
+
+    ProductModel* product = [json deserialize:[ProductModel class]];
+
+
+Requirements
+
+1) Use Properties
+Use auto-retaining properties for all your fields.  Also, property names are case sensitive.
+
+2) Name Classes "XYZModel" for Deserialization
+The deserializer needs to know about what classes to deserialize to.  If you name your classes with the suffix "Model" then we'll register them automatically for you.  You're welcome.
+
+If you don't like our naming conventions, then you can also manually register classes like this:
+
+    [[BTSerializer current] registerClasses:[NSArray arrayWithObjects:[Product class], nil]];
+
+
+
+Limitations
+
+There are probably tons of things that don't work correctly, so don't use this for something important.  It's not intended as a super-robust serialization library.  It's my response to my hatred of creating dictionaries & loading from dictionaries for really simple models.
+
+If you know of a library that works better, pleeeease let me know.  I have no desire to roll my own, but it seemed to be the only option.  If you want to adopt my code, then you can have it.  By all means, awesomeize it.
+
+
+
