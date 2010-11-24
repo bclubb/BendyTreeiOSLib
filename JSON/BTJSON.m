@@ -52,8 +52,7 @@
 - (NSArray*) getClassesForClass:(Class)subclass;
 - (bool) class:(Class)classA descendsFrom:(Class)classB;
 - (bool) descendsFromNSObject:(Class)classA;
-+ (bool) arraysAreSame:(NSArray*)a and:(NSArray*)b;
-- (NSArray*) getClassesMatchingDictionary:(NSDictionary*)dic;
+- (Class) getClassMatchingDictionary:(NSDictionary*)dic assignableTo:(Class)type;
 + (NSArray*) getPropertyNamesForSpecificClass:(Class)cls;
 + (NSArray*) getPropertyNamesForClasses:(NSArray*)classes;
 + (Class) getTypeOfProperty:(NSString*)name onObject:(id)obj;
@@ -63,6 +62,16 @@
 @implementation BTSerializer
 
 @synthesize AllClasses;
+
+- (id) init
+{
+    self = [super init];
+    if (self != nil) {
+        self.AllClasses = [self findModelClasses];
+    }
+    return self;
+}
+
 
 
 #pragma mark Registering Classes
@@ -89,6 +98,9 @@
 
 - (id) convertCustomObjectToCoreType:(id)obj
 {
+    if(obj == nil)
+        return nil;
+    
     if([obj isKindOfClass:[NSString class]] || [obj isKindOfClass:[NSNumber class]] || [obj isKindOfClass:[NSDictionary class]]){
         return obj;
     }
@@ -150,17 +162,8 @@
     
     if([obj isKindOfClass:[NSDictionary class]]){
         NSDictionary* dic = (NSDictionary*)obj;
-        if(type == nil)
-        {
-            NSArray* types = [self getClassesMatchingDictionary:dic];
-            if([types count] == 0){
-                [NSException raise:@"Unknown JSON Object" format:@"No matching classes were found for JSON object %@", [dic JSONRepresentation]];
-            }else if([types count] > 1){
-                [NSException raise:@"Ambiguous JSON Object" format:@"Found too many (%i) classes matching JSON object %@", [types count], [dic JSONRepresentation]];
-            }else{
-                type = [types objectAtIndex:0];
-            }
-        }
+        
+        type = [self getClassMatchingDictionary:dic assignableTo:type];
         
         id newObj = [[[type alloc] init] autorelease];
         for(NSString* key in [dic allKeys]){
@@ -169,6 +172,12 @@
             id newVal = [self convertCoreType:oldVal toCustomObjectOfType:valType];
             [newObj setValue:newVal forKey:key];
         }
+        
+        //fire 'deserialized' event
+        SEL deserializedSelector = @selector(deserialized);
+        if([newObj respondsToSelector:deserializedSelector])
+            [newObj performSelector:deserializedSelector];
+        
         return newObj;
     }
     
@@ -183,14 +192,14 @@
     NSMutableArray* allClasses = [NSMutableArray array];
     int classCount = objc_getClassList(NULL, 0);
     Class classes[classCount];
-    objc_getClassList( classes, classCount );
+    objc_getClassList(classes, classCount);
     while (classCount--) {
         @try {
             Class cls = classes[classCount];   
             if(![self descendsFromNSObject:cls]) continue;
             NSString* name = [cls description];
             
-            if([name hasSuffix:@"Model"])            
+            if([name hasSuffix:@"Model"] && ![name hasPrefix:@"NSKVONotifying_"])            
                 [allClasses addObject:cls];
         }
         @catch (NSException * e) { }
@@ -204,7 +213,7 @@
     NSMutableArray* classes = [NSMutableArray array];
     
     for(Class class in self.AllClasses){
-        if(![self class:class descendsFrom:subclass])
+        if(![self class:subclass descendsFrom:class])
             continue;
         
         [classes addObject:class];
@@ -229,33 +238,57 @@
     return [self class:classA descendsFrom:[NSObject class]];
 }
 
-+ (bool) arraysAreSame:(NSArray*)a and:(NSArray*)b
++ (int) compareKeys:(NSArray*)a with:(NSArray*)b
 {
-    if([a count] != [b count]) 
-        return NO;
-    
+    int value = 0;
     for(NSString* aKey in a){
-        if(![b containsObject:aKey])
-            return NO;
+        if([b containsObject:aKey])
+            value += 1000;
+        else
+            value -= 1;
     }
-    return YES;
+    
+    for(NSString* bKey in b){
+        if(![a containsObject:bKey])
+            value -= 1;
+    }
+    return value;
 }
 
-- (NSArray*) getClassesMatchingDictionary:(NSDictionary*)dic
+- (Class) getClassMatchingDictionary:(NSDictionary*)dic assignableTo:(Class)type
 {
-    NSMutableArray* classes = [NSMutableArray array];
+    NSString* typeName = [NSString stringWithFormat:@"%@", type];
+    if([typeName isEqual:@"PageDataModel"])
+    {
+        int i = 0;
+        i++;
+    }
     
+    int maxValue = -1000;
+    Class match = nil;
+    NSArray* dicKeys = [dic allKeys];
     for(Class class in self.AllClasses){
-        NSArray* dicKeys = [dic allKeys];
+        NSString* className = [NSString stringWithFormat:@"%@", class];
+        if(type != nil && ![self class:class descendsFrom:type]) continue;
+        
         NSArray* superClasses = [self getClassesForClass:class];
         NSArray* propertyNames = [BTSerializer getPropertyNamesForClasses:superClasses];
         
-        bool isMatch = [BTSerializer arraysAreSame:dicKeys and:propertyNames];
-        if(isMatch)
-            [classes addObject:class];
+        int equality = [BTSerializer compareKeys:dicKeys with:propertyNames];
+        if(equality > maxValue)
+        {
+            maxValue = equality;
+            match = class;
+        }
     }
     
-    return classes;
+    NSString* matchName = [NSString stringWithFormat:@"%@", match];
+    
+    if(match == nil){
+        [NSException raise:@"Unknown JSON Object" format:@"Matching class not found for JSON object %@", [dic JSONRepresentation]];
+    }
+    
+    return match;
 }
 
 + (NSArray*) getPropertyNamesForSpecificClass:(Class)cls
@@ -268,7 +301,8 @@
         const char *propName = property_getName(property);
         if(propName) {
             NSString *propertyName = [NSString stringWithCString:propName encoding:NSASCIIStringEncoding];
-            [names addObject:propertyName];
+            if(![propertyName hasPrefix:@"_"])
+                [names addObject:propertyName];
         }
     }
     free(properties);   
