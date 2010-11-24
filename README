@@ -1,5 +1,9 @@
 This is the source code for my obj-c library.  It's got a bunch of random things that make iOS development easier.  Check out http://www.bendytree.com for more info or email me at help@bendytree.com
 
+This lib is sorely lacking in documentation, but that's because I'm probably the only one that uses it.  If you have any questions then email me (above) and I'll have a reason to write some better docs.
+
+
+
 JSON
 
 For most people, the most interesting thing in here is the "BTJSON" library which is an extension of the "json-framework" (see http://code.google.com/p/json-framework/).

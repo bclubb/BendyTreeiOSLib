@@ -257,18 +257,12 @@
 
 - (Class) getClassMatchingDictionary:(NSDictionary*)dic assignableTo:(Class)type
 {
-    NSString* typeName = [NSString stringWithFormat:@"%@", type];
-    if([typeName isEqual:@"PageDataModel"])
-    {
-        int i = 0;
-        i++;
-    }
-    
+    //NSString* typeName = [NSString stringWithFormat:@"%@", type];
     int maxValue = -1000;
     Class match = nil;
     NSArray* dicKeys = [dic allKeys];
     for(Class class in self.AllClasses){
-        NSString* className = [NSString stringWithFormat:@"%@", class];
+        //NSString* className = [NSString stringWithFormat:@"%@", class];
         if(type != nil && ![self class:class descendsFrom:type]) continue;
         
         NSArray* superClasses = [self getClassesForClass:class];
@@ -282,8 +276,7 @@
         }
     }
     
-    NSString* matchName = [NSString stringWithFormat:@"%@", match];
-    
+    //NSString* matchName = [NSString stringWithFormat:@"%@", match];
     if(match == nil){
         [NSException raise:@"Unknown JSON Object" format:@"Matching class not found for JSON object %@", [dic JSONRepresentation]];
     }
