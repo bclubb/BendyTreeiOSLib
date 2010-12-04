@@ -7,20 +7,20 @@
 //
 
 #import "ZoomTextField.h"
-#import "ZoomTextFieldDelegate.h"
-#import "AlertService.h"
+#import "IZoomable.h"
+#import "ZoomTextDelegate.h"
 
 @implementation ZoomTextField
 
-@synthesize delegateReference;
+@synthesize zoomInfo;
 
 - (id)initWithCoder:(NSCoder *)inCoder;
 {
     self = [super initWithCoder:inCoder];
     if (self != nil) {
         
-        self.delegate = [[[ZoomTextFieldDelegate alloc] init] autorelease];
-        self.delegateReference = self.delegate;
+        self.delegate = [[ZoomTextDelegate alloc] initWithZoomTextElement:self];
+        self.zoomInfo = [[[ZoomInfo alloc] init] autorelease];
         
         [self setReturnKeyType:UIReturnKeyDone];
         
@@ -28,13 +28,18 @@
     return self;
 }
 
+- (CGSize) zoomedSize
+{
+    return CGSizeMake(300, self.frame.size.height);
+}
+
 - (void) dealloc
 {
-    self.delegateReference = nil;
+    [self.delegate release]; //not (retain) so manual release
+    self.delegate = nil;
+    self.zoomInfo = nil;
     
     [super dealloc];
 }
-
-
 
 @end

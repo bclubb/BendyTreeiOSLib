@@ -7,12 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Callback.h"
+#import "IZoomable.h"
+#import "ZoomInfo.h"
 
-
-@interface ZoomTextView : UITextView {
+@interface ZoomTextView : UITextView<IZoomable> {
 
 }
 
-@property (retain) id delegateReference;
+@property (retain) ZoomInfo* zoomInfo;
 
 @end

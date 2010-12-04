@@ -7,19 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Callback.h"
+#import "ZoomTextDelegate.h"
 
 @interface ZoomBackgroundManager : NSObject {
-    
     UILabel* label;
-    
+    UIButton* btnPrev;
+    UIButton* btnNext;
 }
 
 @property (retain) UIView* blackout;
+@property (assign) ZoomTextDelegate* txtDelegate;
 
 + (ZoomBackgroundManager*) current;
 
-- (void) zoomIn:(UIView *)txt withHeight:(int)height;
-- (void) zoomOut:(UIView *)txt originalSuperview:(UIView*)originalSuperview originalFrame:(CGRect)originalFrame;
+- (void) zoomIn:(ZoomTextDelegate*)_txtDelegate;
+- (void) pressedDone;
 
 @end
