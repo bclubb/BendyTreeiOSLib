@@ -7,6 +7,7 @@
 //
 
 #import "ColorService.h"
+#import "UIColor-Expanded.h"
 
 @implementation NSString (Color)
 
@@ -16,6 +17,17 @@
 }
 
 @end
+
+
+@implementation UIColor (Color)
+
+- (NSString*) colorToHexString
+{
+    return [ColorService convertColorToHexString:self];
+}
+
+@end
+
 
 
 @implementation ColorService
@@ -48,6 +60,28 @@
                            green:((float) g / 255.0f)
                             blue:((float) b / 255.0f)
                            alpha:((float) a / 255.0f)]; 
+}
+
++ (NSString*) convertColorToHexString:(UIColor*)color
+{
+    NSAssert (color.canProvideRGBComponents, @"Must be a RGB color to use convertColorToHexString");
+
+    CGFloat r, g, b;
+    r = color.red;
+    g = color.green;
+    b = color.blue;
+
+    // Fix range if needed
+    if (r < 0.0f) r = 0.0f;
+    if (g < 0.0f) g = 0.0f;
+    if (b < 0.0f) b = 0.0f;
+
+    if (r > 1.0f) r = 1.0f;
+    if (g > 1.0f) g = 1.0f;
+    if (b > 1.0f) b = 1.0f;
+
+    // Convert to hex string between 0x00 and 0xFF
+    return [NSString stringWithFormat:@"%02X%02X%02X", (int)(r * 255), (int)(g * 255), (int)(b * 255)]; 
 }
 
 @end

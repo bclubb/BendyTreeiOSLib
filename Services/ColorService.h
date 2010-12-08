@@ -14,9 +14,17 @@
 
 @end
 
+@interface UIColor (Color)
+
+- (NSString*) colorToHexString;
+
+@end
+
+
 
 @interface ColorService : NSObject
 
 + (UIColor*) convertHexStringToColor:(NSString*)hex;
++ (NSString*) convertColorToHexString:(UIColor*)color;
 
 @end
