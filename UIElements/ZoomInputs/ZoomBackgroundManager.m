@@ -137,6 +137,7 @@ static ZoomBackgroundManager* _current = NULL;
     
     [UIView beginAnimations:@"ZoomTextField" context:nil];
     [UIView setAnimationDuration:.5];
+    [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(zoomOutCompleted)];
     [self.txtDelegate.txt setFrame:self.txtDelegate.originalFrame];
     [self.blackout setAlpha:0];
