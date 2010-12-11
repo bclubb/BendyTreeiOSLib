@@ -7,12 +7,24 @@
 //
 
 #import "PropertyMetaModel.h"
-#import "QuickTextFieldPropertyEditorController.h"
+#import "CustomEditorManager.h"
 #import "ObjectMetaModel.h"
+
+
+NSString * const PropertyMetaModelTypeKey_StringSingleLine = @"StringSingleLine";
+NSString * const PropertyMetaModelTypeKey_StringMultipleLine = @"StringMultipleLine";
+NSString * const PropertyMetaModelTypeKey_NSDate = @"NSDate";
+NSString * const PropertyMetaModelTypeKey_NSNumber = @"NSNumber";
+NSString * const PropertyMetaModelTypeKey_bool = @"bool";
+NSString * const PropertyMetaModelTypeKey_int = @"int";
+NSString * const PropertyMetaModelTypeKey_float = @"float";
+NSString * const PropertyMetaModelTypeKey_double = @"double";
+NSString * const PropertyMetaModelTypeKey_CustomObject = @"CustomObject";
+
 
 @implementation PropertyMetaModel
 
-@synthesize Name, Key, _ObjectMeta;
+@synthesize Name, TypeKey, TypeMeta, PropertyKey, _ObjectMeta;
 
 
 - (id) init
@@ -24,40 +36,28 @@
     return self;
 }
 
-- (UIViewController*) newEditorOfObject:(NSObject*)_obj
+- (UIViewController*) newEditorOfObject:(NSObject*)_obj navController:(UINavigationController*)_navController
 {
-    [NSException raise:@"Should be overridden" format:@"Override Me"];
+    return [[CustomEditorManager current] getEditorForProperty:self object:_obj navController:_navController];
 }
 
-- (NSString*) getValueAsString:(id)_obj
+- (id) getValueOnObject:(id)_obj
 {
-    id val = [_obj valueForKey:self.Key];
-    return [val description];
+    return [_obj valueForKey:self.PropertyKey];
 }
 
-- (bool) setValue:(NSString*)str onObject:(id)_obj
-{/*
-    id val;
-    if(self.Type == [NSString class]){
-        val = str;
-    }else if(self.Type == [NSNumber class]){
-        NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
-        val = [formatter numberFromString:str];
-        [formatter release];
-    }
-    
-    if(val == nil)
-        return NO;
-        
-    [_obj setValue:val forKey:self.Key];
-  */
-    return YES;
+- (void) setValue:(id)val onObject:(id)_obj
+{
+    [_obj setValue:val forKey:self.PropertyKey];
 }
+
 
 - (void) dealloc
 {
     self.Name = nil;
-    self.Key = nil;
+    self.TypeKey = nil;
+    self.TypeMeta = nil;
+    self.PropertyKey = nil;
     self._ObjectMeta = nil;
     
     [super dealloc];

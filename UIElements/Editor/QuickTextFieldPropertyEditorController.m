@@ -7,7 +7,6 @@
 //
 
 #import "QuickTextFieldPropertyEditorController.h"
-#import "PropertyMetaModel.h"
 #import "ZoomTextField.h"
 #import "BTJSON.h"
 #import "AlertService.h"
@@ -17,7 +16,7 @@
 @synthesize object, property;
 
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithProperty:(PropertyMetaModel*)_property onObject:(NSObject*)_obj {
+- (id)initWithProperty:(PropertyMetaModel*)_property onObject:(NSObject*)_obj navController:(UINavigationController*)_navController {
     if ((self = [super initWithNibName:@"QuickTextFieldPropertyEditorController" bundle:nil])) {
         self.property = _property;
         self.object = _obj;
@@ -33,18 +32,27 @@
     lblName.text = self.property.Name;
     txt.zoomInfo.title = self.property.Name;
     [txt.zoomInfo setOnComplete:[Callback fromObject:self andSelector:@selector(textFinished)]];
-    txt.text = [self.property getValueAsString:self.object];
+    txt.text = [[self.property getValueOnObject:self.object] description];
 }
+
 
 - (void) textFinished
 {
-    if(![self.property setValue:txt.text onObject:self.object])
-    {
-        [AlertService show:@"Invalid Data"];
-        txt.text = [self.property getValueAsString:self.object];
+    id val;
+    if([self.property.TypeKey isEqualToString:PropertyMetaModelTypeKey_StringSingleLine]){
+        val = txt.text;
+    }else{
+        NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+        val = [formatter numberFromString:txt.text];
+        [formatter release];
     }
     
-    NSLog(@"%@", [self.object serialize]);
+    if(val){
+        [self.property setValue:val onObject:self.object];
+    }else{
+        [AlertService show:@"Invalid data"];
+        txt.text = [[self.property getValueOnObject:self.object] description];        
+    }
 }
 
 - (void)didReceiveMemoryWarning {

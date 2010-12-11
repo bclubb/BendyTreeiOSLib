@@ -9,17 +9,40 @@
 #import <Foundation/Foundation.h>
 #import "ObjectMetaModel.h"
 
+
+extern NSString* const PropertyMetaModelTypeKey_StringSingleLine;
+extern NSString* const PropertyMetaModelTypeKey_StringMultipleLine;
+extern NSString* const PropertyMetaModelTypeKey_NSDate;
+extern NSString* const PropertyMetaModelTypeKey_NSNumber;
+extern NSString* const PropertyMetaModelTypeKey_bool;
+extern NSString* const PropertyMetaModelTypeKey_int;
+extern NSString* const PropertyMetaModelTypeKey_float;
+extern NSString* const PropertyMetaModelTypeKey_double;
+extern NSString* const PropertyMetaModelTypeKey_CustomObject;
+
+
 @interface PropertyMetaModel : NSObject {
 
 }
 
 @property (retain) ObjectMetaModel* _ObjectMeta;
-@property (retain) NSString* Key;
+@property (retain) NSString* PropertyKey;
 @property (retain) NSString* Name;
+@property (retain) NSString* TypeKey;
+@property (retain) ObjectMetaModel* TypeMeta;
 
-- (UIViewController*) newEditorOfObject:(NSObject*)_obj;
+- (UIViewController*) newEditorOfObject:(NSObject*)_obj navController:(UINavigationController*)_navController;
 
-- (NSString*) getValueAsString:(id)_obj;
-- (bool) setValue:(NSString*)str onObject:(id)_obj;
+- (id) getValueOnObject:(id)_obj;
+
+- (void) setValue:(id)val onObject:(id)_obj;
+
+@end
+
+
+
+@protocol IPropertyEditorController
+
+- (id)initWithProperty:(PropertyMetaModel*)_property onObject:(NSObject*)_obj navController:(UINavigationController*)_navController;
 
 @end

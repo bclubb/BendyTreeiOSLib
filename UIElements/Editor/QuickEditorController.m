@@ -10,6 +10,7 @@
 #import "ObjectMetaModel.h"
 #import "PropertyMetaModel.h"
 #import "ExpandableController.h"
+#import "AlertService.h"
 
 @implementation QuickEditorController
 
@@ -31,10 +32,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if(!self.navigationController)
+    {
+        [AlertService show:@"ERROR: QuickEditorController must be in a nav controller"];
+        NSLog(@"QuickEditorController must be inside a navigationController");
+    }
+    
     NSMutableArray* controllers = [NSMutableArray array];
     
     for(PropertyMetaModel* property in self.objectMeta.Properties){
-        UIViewController* controller = [property newEditorOfObject:self.object];
+        UIViewController* controller = [property newEditorOfObject:self.object navController:self.navigationController];
         [controllers addObject:controller];
     }
     

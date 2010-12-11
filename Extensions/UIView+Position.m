@@ -76,6 +76,5 @@
     [self setFrame: CGRectMake(size.width, size.height, self.frame.size.width, self.frame.size.height)];
 }
 
-
 @end
 

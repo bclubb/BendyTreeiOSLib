@@ -1,5 +1,5 @@
 //
-//  QuickCustomObjectPropertyEditorController.h
+//  QuickTextViewPropertyEditorController.h
 //  YourAppHereAppSource
 //
 //  Created by JOSHUA WRIGHT on 12/8/10.
@@ -8,18 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "PropertyMetaModel.h"
+#import "ZoomTextView.h"
 
+@interface QuickTextViewPropertyEditorController : UIViewController<IPropertyEditorController> {
 
-@interface QuickCustomObjectPropertyEditorController : UIViewController<IPropertyEditorController> {
-    
-    IBOutlet UILabel* lbl;
+    IBOutlet UILabel* lblName;
+    IBOutlet ZoomTextView* txt;
     
 }
 
 @property (retain) NSObject* object;
 @property (retain) PropertyMetaModel* property;
-@property (retain) UINavigationController* navController;
-
-- (IBAction) pressedButton;
 
 @end

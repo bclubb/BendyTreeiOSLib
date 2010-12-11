@@ -1,27 +1,25 @@
 //
-//  QuickCustomObjectPropertyEditorController.m
+//  QuickBoolPropertyEditorController.m
 //  YourAppHereAppSource
 //
 //  Created by JOSHUA WRIGHT on 12/8/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "QuickCustomObjectPropertyEditorController.h"
-#import "PropertyMetaModel.h"
+#import "QuickBoolPropertyEditorController.h"
+#import "ZoomTextField.h"
 #import "BTJSON.h"
 #import "AlertService.h"
-#import "QuickEditorController.h"
 
-@implementation QuickCustomObjectPropertyEditorController
+@implementation QuickBoolPropertyEditorController
 
-@synthesize object, property, navController;
+@synthesize object, property;
 
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithProperty:(PropertyMetaModel*)_property onObject:(NSObject*)_obj navController:(UINavigationController*)_navController {
-    if ((self = [super initWithNibName:@"QuickCustomObjectPropertyEditorController" bundle:nil])) {
+    if ((self = [super initWithNibName:@"QuickBoolPropertyEditorController" bundle:nil])) {
         self.property = _property;
         self.object = _obj;
-        self.navController = _navController;
     }
     return self;
 }
@@ -31,15 +29,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    lbl.text = self.property.Name;
+    lblName.text = self.property.Name;
+    uiSwitch.on = [(NSNumber*)[self.property getValueOnObject:self.object] boolValue];
 }
 
-- (IBAction) pressedButton
+
+- (IBAction) switchChanged
 {
-    QuickEditorController* controller = [[[QuickEditorController alloc] initWithObjectMeta:self.property.TypeMeta object:[self.property getValueOnObject:self.object]] autorelease];
-    [self.navController pushViewController:controller animated:YES];
+    [self.property setValue:[NSNumber numberWithBool:uiSwitch.on] onObject:self.object];
 }
-
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -58,7 +56,6 @@
 - (void)dealloc {
     self.property = nil;
     self.object = nil;
-    self.navController = nil;
     
     [super dealloc];
 }

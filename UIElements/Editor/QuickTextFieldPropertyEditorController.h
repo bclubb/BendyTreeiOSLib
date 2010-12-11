@@ -10,14 +10,12 @@
 #import "PropertyMetaModel.h"
 #import "ZoomTextField.h"
 
-@interface QuickTextFieldPropertyEditorController : UIViewController {
+@interface QuickTextFieldPropertyEditorController : UIViewController<IPropertyEditorController> {
 
     IBOutlet UILabel* lblName;
     IBOutlet ZoomTextField* txt;
     
 }
-
-- (id)initWithProperty:(PropertyMetaModel*)_property onObject:(NSObject*)_obj;
 
 @property (retain) NSObject* object;
 @property (retain) PropertyMetaModel* property;

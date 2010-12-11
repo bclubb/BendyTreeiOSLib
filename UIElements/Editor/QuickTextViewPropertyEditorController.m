@@ -1,27 +1,26 @@
 //
-//  QuickCustomObjectPropertyEditorController.m
+//  QuickTextViewPropertyEditorController.m
 //  YourAppHereAppSource
 //
 //  Created by JOSHUA WRIGHT on 12/8/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "QuickCustomObjectPropertyEditorController.h"
-#import "PropertyMetaModel.h"
+#import "QuickTextViewPropertyEditorController.h"
+#import "ZoomTextField.h"
 #import "BTJSON.h"
 #import "AlertService.h"
-#import "QuickEditorController.h"
+#import <QuartzCore/QuartzCore.h>
 
-@implementation QuickCustomObjectPropertyEditorController
+@implementation QuickTextViewPropertyEditorController
 
-@synthesize object, property, navController;
+@synthesize object, property;
 
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithProperty:(PropertyMetaModel*)_property onObject:(NSObject*)_obj navController:(UINavigationController*)_navController {
-    if ((self = [super initWithNibName:@"QuickCustomObjectPropertyEditorController" bundle:nil])) {
+    if ((self = [super initWithNibName:@"QuickTextViewPropertyEditorController" bundle:nil])) {
         self.property = _property;
         self.object = _obj;
-        self.navController = _navController;
     }
     return self;
 }
@@ -31,15 +30,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    lbl.text = self.property.Name;
+    lblName.text = self.property.Name;
+    txt.zoomInfo.title = self.property.Name;
+    [txt.zoomInfo setOnComplete:[Callback fromObject:self andSelector:@selector(textFinished)]];
+    txt.text = [[self.property getValueOnObject:self.object] description];
+    [txt.layer setBorderWidth:1];
 }
 
-- (IBAction) pressedButton
+
+- (void) textFinished
 {
-    QuickEditorController* controller = [[[QuickEditorController alloc] initWithObjectMeta:self.property.TypeMeta object:[self.property getValueOnObject:self.object]] autorelease];
-    [self.navController pushViewController:controller animated:YES];
+    [self.property setValue:txt.text onObject:self.object];    
 }
-
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -58,7 +60,6 @@
 - (void)dealloc {
     self.property = nil;
     self.object = nil;
-    self.navController = nil;
     
     [super dealloc];
 }
