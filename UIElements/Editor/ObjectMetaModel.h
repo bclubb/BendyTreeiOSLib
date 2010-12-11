@@ -14,5 +14,11 @@
 }
 
 @property (retain) NSArray* Properties;
+@property (retain) NSString* ClassName;
+@property (retain) NSString* DescriptionFormat;
+
+- (id) createNewInstance;
+- (Class) getClass;
+- (NSString*) describe:(id)obj;
 
 @end

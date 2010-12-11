@@ -8,10 +8,11 @@
 
 #import "ObjectMetaModel.h"
 #import "PropertyMetaModel.h"
+#import "StringFormatting.h"
 
 @implementation ObjectMetaModel
 
-@synthesize Properties;
+@synthesize Properties, ClassName, DescriptionFormat;
 
 - (id) init
 {
@@ -21,6 +22,7 @@
         [self addObserver:self forKeyPath:@"Properties" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
         
         self.Properties = [NSMutableArray array];
+        self.ClassName = [[NSMutableDictionary class] description];
         
     }
     return self;
@@ -35,13 +37,31 @@
     }
 }
 
+- (Class) getClass
+{    
+    return NSClassFromString(self.ClassName);
+}
 
+- (id) createNewInstance
+{
+    return [[[[self getClass] alloc] init] autorelease];
+}
+
+- (NSString*) describe:(id)obj
+{
+    if(self.DescriptionFormat)
+        return [self.DescriptionFormat format:obj];
+    
+    return [obj description];
+}
 
 - (void) dealloc
 {
     [self removeObserver:self forKeyPath:@"Properties"];
     
     self.Properties = nil;
+    self.ClassName = nil;
+    self.DescriptionFormat = nil;
     
     [super dealloc];
 }

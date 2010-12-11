@@ -53,6 +53,12 @@
     [self.scroller setContentSize:CGSizeMake(320, height)];
 }
 
+- (void) updateHeight:(int)_height
+{
+    fullHeight = _height;
+    [self.view setHeight:_height];
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];

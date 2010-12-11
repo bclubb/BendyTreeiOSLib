@@ -22,6 +22,7 @@
 - (id) initWithControllers:(NSArray*)_controllers height:(int)_height;
 
 - (void) performSelectorOnControllers:(SEL)selector;
+- (void) updateHeight:(int)_height;
 
 + (void) repositionParentOf:(UIViewController*)controller;
 

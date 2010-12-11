@@ -20,11 +20,12 @@ NSString * const PropertyMetaModelTypeKey_int = @"int";
 NSString * const PropertyMetaModelTypeKey_float = @"float";
 NSString * const PropertyMetaModelTypeKey_double = @"double";
 NSString * const PropertyMetaModelTypeKey_CustomObject = @"CustomObject";
+NSString * const PropertyMetaModelTypeKey_Collection = @"Collection";
 
 
 @implementation PropertyMetaModel
 
-@synthesize Name, TypeKey, TypeMeta, PropertyKey, _ObjectMeta;
+@synthesize Name, TypeKey, TypeMeta, SubTypeKey, PropertyKey, _ObjectMeta;
 
 
 - (id) init
@@ -51,12 +52,12 @@ NSString * const PropertyMetaModelTypeKey_CustomObject = @"CustomObject";
     [_obj setValue:val forKey:self.PropertyKey];
 }
 
-
 - (void) dealloc
 {
     self.Name = nil;
     self.TypeKey = nil;
     self.TypeMeta = nil;
+    self.SubTypeKey = nil;
     self.PropertyKey = nil;
     self._ObjectMeta = nil;
     

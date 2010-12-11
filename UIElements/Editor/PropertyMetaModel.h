@@ -19,6 +19,7 @@ extern NSString* const PropertyMetaModelTypeKey_int;
 extern NSString* const PropertyMetaModelTypeKey_float;
 extern NSString* const PropertyMetaModelTypeKey_double;
 extern NSString* const PropertyMetaModelTypeKey_CustomObject;
+extern NSString* const PropertyMetaModelTypeKey_Collection;
 
 
 @interface PropertyMetaModel : NSObject {
@@ -29,12 +30,12 @@ extern NSString* const PropertyMetaModelTypeKey_CustomObject;
 @property (retain) NSString* PropertyKey;
 @property (retain) NSString* Name;
 @property (retain) NSString* TypeKey;
+@property (retain) NSString* SubTypeKey;
 @property (retain) ObjectMetaModel* TypeMeta;
 
 - (UIViewController*) newEditorOfObject:(NSObject*)_obj navController:(UINavigationController*)_navController;
 
 - (id) getValueOnObject:(id)_obj;
-
 - (void) setValue:(id)val onObject:(id)_obj;
 
 @end

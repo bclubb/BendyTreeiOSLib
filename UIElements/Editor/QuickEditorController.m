@@ -45,8 +45,15 @@
         [controllers addObject:controller];
     }
     
-    self.expandable = [[[ExpandableController alloc] initWithControllers:controllers height:self.view.frame.size.height] autorelease];
+    self.expandable = [[[ExpandableController alloc] initWithControllers:controllers height:480-(20+44)] autorelease];
     self.view = self.expandable.view;
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.expandable viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

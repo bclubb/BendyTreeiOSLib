@@ -13,6 +13,7 @@
 #import "QuickTextViewPropertyEditorController.h"
 #import "QuickCustomObjectPropertyEditorController.h"
 #import "QuickBoolPropertyEditorController.h"
+#import "QuickCollectionPropertyEditorController.h"
 
 @implementation CustomEditorManager
 
@@ -33,6 +34,7 @@
         [self registerEditor:[QuickTextFieldPropertyEditorController class] forTypeKey:PropertyMetaModelTypeKey_float];
         [self registerEditor:[QuickTextFieldPropertyEditorController class] forTypeKey:PropertyMetaModelTypeKey_double];
         [self registerEditor:[QuickCustomObjectPropertyEditorController class] forTypeKey:PropertyMetaModelTypeKey_CustomObject];
+        [self registerEditor:[QuickCollectionPropertyEditorController class] forTypeKey:PropertyMetaModelTypeKey_Collection];
     }
     return self;
 }
