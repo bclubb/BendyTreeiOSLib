@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'BendyTreeiPhoneLibTesting' target in the 'BendyTreeiPhoneLibTesting' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+#endif
