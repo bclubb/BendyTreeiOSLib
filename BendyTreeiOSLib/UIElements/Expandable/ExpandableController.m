@@ -19,35 +19,29 @@
 
 @implementation ExpandableController
 
-@synthesize _controllers, scroller;
+@synthesize initialHeight, controllers, scroller;
 
-- (id) initWithControllers:(NSArray*)__controllers height:(int)_height
+- (id) initWithControllers:(NSArray*)_controllers height:(int)_initialHeight
 {
     self = [super init];
     if (self != nil) {
-        
-        self._controllers = __controllers;
-        fullHeight = _height;
+        self.controllers = _controllers;
+        self.initialHeight = _initialHeight;
         
         [ExpandableController addExpandable:self];
         
+        [self addObserver:self forKeyPath:@"view.frame" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
     }
     return self;
-}
-
-- (NSArray*) controllers
-{
-    return self._controllers;
 }
 
 - (void) reposition
 {
     int height = 0;
-    for(UIViewController* c in self._controllers)
+    for(UIViewController* c in self.controllers)
     {
         [c.view setY:height];
         int viewHeight = c.view.frame.size.height;   
-        NSLog(@"%i", viewHeight);
         height += viewHeight;
     }
     [self.scroller setContentSize:CGSizeMake(320, height)];
@@ -55,22 +49,30 @@
 
 - (void) updateHeight:(int)_height
 {
-    fullHeight = _height;
+    [self.scroller setHeight:_height];
     [self.view setHeight:_height];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqual:@"view.frame"]){
+        [self.scroller setHeight:self.view.frame.size.height];
+        [self reposition];
+    }
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.scroller = [[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, fullHeight)] autorelease];
+    self.scroller = [[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, self.initialHeight)] autorelease];
     [self.view addSubview:self.scroller];
-    [self.view setY:0 andHeight:fullHeight]; 
+    [self.view setY:0 andHeight:self.initialHeight]; 
     
     [self.view setAutoresizesSubviews:NO];
     [self.scroller setAutoresizesSubviews:NO];
     
-    for(UIViewController* c in self._controllers)
+    for(UIViewController* c in self.controllers)
     {
         [self.scroller addSubview:c.view];
     }
@@ -83,7 +85,7 @@
 {
     [super viewWillAppear:animated];
     
-    for(UIViewController* c in self._controllers)
+    for(UIViewController* c in self.controllers)
     {
         [c viewWillAppear:animated]; 
     }    
@@ -91,7 +93,7 @@
 
 - (void) performSelectorOnControllers:(SEL)selector
 {
-    for(id controller in self._controllers)
+    for(id controller in self.controllers)
     {
         if(![controller respondsToSelector:selector]) continue;
         
@@ -114,8 +116,12 @@
 }
 
 - (void)dealloc {
-    self._controllers = nil;
+    [self removeObserver:self forKeyPath:@"view.frame"];
+    
+    self.controllers = nil;
     self.scroller = nil;
+    self.initialHeight = 0;
+    
     [ExpandableController removeExpandable:self];
     
     [super dealloc];

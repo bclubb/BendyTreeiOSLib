@@ -17,6 +17,7 @@
 @property (retain) ObjectMetaModel* objectMeta;
 @property (retain) NSObject* object;
 @property (retain) ExpandableController* expandable;
+@property (retain) UINavigationController* navController;
 
 - (id) initWithObjectMeta:(ObjectMetaModel*)_objectMeta object:(id)_obj;
 

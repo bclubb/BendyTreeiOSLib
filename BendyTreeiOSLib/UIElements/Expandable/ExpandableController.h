@@ -11,13 +11,11 @@
 
 @interface ExpandableController : UIViewController {
     
-    int fullHeight;
-    
 }
 
-- (NSArray*) controllers;
-@property (retain) NSArray* _controllers;
+@property (retain) NSArray* controllers;
 @property (retain) UIScrollView* scroller;
+@property (assign) int initialHeight;
 
 - (id) initWithControllers:(NSArray*)_controllers height:(int)_height;
 

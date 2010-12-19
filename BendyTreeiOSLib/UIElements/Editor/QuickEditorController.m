@@ -14,7 +14,7 @@
 
 @implementation QuickEditorController
 
-@synthesize objectMeta, expandable, object;
+@synthesize objectMeta, expandable, object, navController;
 
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id) initWithObjectMeta:(ObjectMetaModel*)_objectMeta object:(id)_obj {
@@ -27,12 +27,19 @@
     return self;
 }
 
+- (UINavigationController*) getNavController
+{
+    if(self.navigationController)
+        return self.navigationController;
+    
+    return self.navController;
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if(!self.navigationController)
+    if(!self.getNavController)
     {
         [AlertService show:@"ERROR: QuickEditorController must be in a nav controller"];
         NSLog(@"QuickEditorController must be inside a navigationController");
@@ -41,7 +48,7 @@
     NSMutableArray* controllers = [NSMutableArray array];
     
     for(PropertyMetaModel* property in self.objectMeta.Properties){
-        UIViewController* controller = [property newEditorOfObject:self.object navController:self.navigationController];
+        UIViewController* controller = [property newEditorOfObject:self.object navController:self.getNavController];
         [controllers addObject:controller];
     }
     
@@ -74,6 +81,7 @@
     self.objectMeta = nil;
     self.expandable = nil;
     self.object = nil;
+    self.navController = nil;
     
     [super dealloc];
 }
