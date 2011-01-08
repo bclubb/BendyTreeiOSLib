@@ -51,20 +51,25 @@
 		BC28972712B44DBF00F24468 /* QuickTextViewPropertyEditorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC2896EC12B44DBF00F24468 /* QuickTextViewPropertyEditorController.xib */; };
 		BC28972812B44DBF00F24468 /* ExpandableController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2896EF12B44DBF00F24468 /* ExpandableController.m */; };
 		BC28972912B44DBF00F24468 /* MotionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2896F112B44DBF00F24468 /* MotionWindow.m */; };
-		BC28972A12B44DBF00F24468 /* JavaScriptHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2896F412B44DBF00F24468 /* JavaScriptHandler.m */; };
-		BC28972B12B44DBF00F24468 /* JavaScriptLibrary.txt in Resources */ = {isa = PBXBuildFile; fileRef = BC2896F512B44DBF00F24468 /* JavaScriptLibrary.txt */; };
-		BC28972C12B44DBF00F24468 /* JavaScriptManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2896F712B44DBF00F24468 /* JavaScriptManipulator.m */; };
 		BC28972D12B44DBF00F24468 /* ZoomBackgroundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2896FB12B44DBF00F24468 /* ZoomBackgroundManager.m */; };
 		BC28972E12B44DBF00F24468 /* ZoomInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2896FD12B44DBF00F24468 /* ZoomInfo.m */; };
 		BC28972F12B44DBF00F24468 /* ZoomTextDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2896FF12B44DBF00F24468 /* ZoomTextDelegate.m */; };
 		BC28973012B44DBF00F24468 /* ZoomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = BC28970112B44DBF00F24468 /* ZoomTextField.m */; };
 		BC28973112B44DBF00F24468 /* ZoomTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC28970312B44DBF00F24468 /* ZoomTextView.m */; };
+		BC38BFF412CFE450007F340F /* AlertCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = BC38BFF312CFE450007F340F /* AlertCommand.m */; };
 		BC48B607129C823100B11B47 /* Observee.m in Sources */ = {isa = PBXBuildFile; fileRef = BC48B606129C823100B11B47 /* Observee.m */; };
 		BC867047129994E2002CCB5E /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BC867046129994E2002CCB5E /* libicucore.A.dylib */; };
 		BC867062129995A4002CCB5E /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC867061129995A4002CCB5E /* AppModel.m */; };
 		BC86715F129A15B0002CCB5E /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = BC86715E129A15B0002CCB5E /* Page.m */; };
 		BC86717C129A1704002CCB5E /* WidgetPage.m in Sources */ = {isa = PBXBuildFile; fileRef = BC86717B129A1704002CCB5E /* WidgetPage.m */; };
 		BC86717F129A1718002CCB5E /* WebPage.m in Sources */ = {isa = PBXBuildFile; fileRef = BC86717E129A1718002CCB5E /* WebPage.m */; };
+		BCFF056E12CFC1B2008D32DB /* CommandableWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFF056A12CFC1B2008D32DB /* CommandableWebView.m */; };
+		BCFF056F12CFC1B2008D32DB /* WebCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFF056C12CFC1B2008D32DB /* WebCommand.m */; };
+		BCFF059812CFC2F3008D32DB /* TestCommandableWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFF059612CFC2F3008D32DB /* TestCommandableWebViewController.m */; };
+		BCFF059912CFC2F3008D32DB /* TestCommandableWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCFF059712CFC2F3008D32DB /* TestCommandableWebViewController.xib */; };
+		BCFF05A412CFC469008D32DB /* TestCommandableWebViewController.html in Resources */ = {isa = PBXBuildFile; fileRef = BCFF05A312CFC469008D32DB /* TestCommandableWebViewController.html */; };
+		BCFF05DB12CFC65B008D32DB /* PageWebCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFF05DA12CFC65B008D32DB /* PageWebCommand.m */; };
+		BCFF070C12CFD516008D32DB /* CommandableWebView.txt in Resources */ = {isa = PBXBuildFile; fileRef = BCFF070B12CFD516008D32DB /* CommandableWebView.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -150,11 +155,6 @@
 		BC2896EF12B44DBF00F24468 /* ExpandableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableController.m; sourceTree = "<group>"; };
 		BC2896F012B44DBF00F24468 /* MotionWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionWindow.h; sourceTree = "<group>"; };
 		BC2896F112B44DBF00F24468 /* MotionWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionWindow.m; sourceTree = "<group>"; };
-		BC2896F312B44DBF00F24468 /* JavaScriptHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavaScriptHandler.h; sourceTree = "<group>"; };
-		BC2896F412B44DBF00F24468 /* JavaScriptHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JavaScriptHandler.m; sourceTree = "<group>"; };
-		BC2896F512B44DBF00F24468 /* JavaScriptLibrary.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JavaScriptLibrary.txt; sourceTree = "<group>"; };
-		BC2896F612B44DBF00F24468 /* JavaScriptManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavaScriptManipulator.h; sourceTree = "<group>"; };
-		BC2896F712B44DBF00F24468 /* JavaScriptManipulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JavaScriptManipulator.m; sourceTree = "<group>"; };
 		BC2896F912B44DBF00F24468 /* IZoomable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IZoomable.h; sourceTree = "<group>"; };
 		BC2896FA12B44DBF00F24468 /* ZoomBackgroundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomBackgroundManager.h; sourceTree = "<group>"; };
 		BC2896FB12B44DBF00F24468 /* ZoomBackgroundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomBackgroundManager.m; sourceTree = "<group>"; };
@@ -166,6 +166,8 @@
 		BC28970112B44DBF00F24468 /* ZoomTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomTextField.m; sourceTree = "<group>"; };
 		BC28970212B44DBF00F24468 /* ZoomTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomTextView.h; sourceTree = "<group>"; };
 		BC28970312B44DBF00F24468 /* ZoomTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomTextView.m; sourceTree = "<group>"; };
+		BC38BFF212CFE450007F340F /* AlertCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertCommand.h; sourceTree = "<group>"; };
+		BC38BFF312CFE450007F340F /* AlertCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertCommand.m; sourceTree = "<group>"; };
 		BC48B605129C823100B11B47 /* Observee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Observee.h; sourceTree = "<group>"; };
 		BC48B606129C823100B11B47 /* Observee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Observee.m; sourceTree = "<group>"; };
 		BC867046129994E2002CCB5E /* libicucore.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.A.dylib; path = usr/lib/libicucore.A.dylib; sourceTree = SDKROOT; };
@@ -177,6 +179,17 @@
 		BC86717B129A1704002CCB5E /* WidgetPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WidgetPage.m; sourceTree = "<group>"; };
 		BC86717D129A1718002CCB5E /* WebPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebPage.h; sourceTree = "<group>"; };
 		BC86717E129A1718002CCB5E /* WebPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebPage.m; sourceTree = "<group>"; };
+		BCFF056812CFC1B2008D32DB /* CommandableWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandableWebView.h; sourceTree = "<group>"; };
+		BCFF056A12CFC1B2008D32DB /* CommandableWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandableWebView.m; sourceTree = "<group>"; };
+		BCFF056B12CFC1B2008D32DB /* WebCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebCommand.h; sourceTree = "<group>"; };
+		BCFF056C12CFC1B2008D32DB /* WebCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebCommand.m; sourceTree = "<group>"; };
+		BCFF059512CFC2F3008D32DB /* TestCommandableWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCommandableWebViewController.h; sourceTree = "<group>"; };
+		BCFF059612CFC2F3008D32DB /* TestCommandableWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestCommandableWebViewController.m; sourceTree = "<group>"; };
+		BCFF059712CFC2F3008D32DB /* TestCommandableWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestCommandableWebViewController.xib; sourceTree = "<group>"; };
+		BCFF05A312CFC469008D32DB /* TestCommandableWebViewController.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = TestCommandableWebViewController.html; sourceTree = "<group>"; };
+		BCFF05D912CFC65B008D32DB /* PageWebCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageWebCommand.h; sourceTree = "<group>"; };
+		BCFF05DA12CFC65B008D32DB /* PageWebCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageWebCommand.m; sourceTree = "<group>"; };
+		BCFF070B12CFD516008D32DB /* CommandableWebView.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CommandableWebView.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,11 +371,11 @@
 		BC2896D212B44DBF00F24468 /* UIElements */ = {
 			isa = PBXGroup;
 			children = (
+				BCFF056712CFC1B2008D32DB /* CommandableWebView */,
 				BC2896D312B44DBF00F24468 /* Editor */,
 				BC2896ED12B44DBF00F24468 /* Expandable */,
 				BC2896F012B44DBF00F24468 /* MotionWindow.h */,
 				BC2896F112B44DBF00F24468 /* MotionWindow.m */,
-				BC2896F212B44DBF00F24468 /* WebView */,
 				BC2896F812B44DBF00F24468 /* ZoomInputs */,
 			);
 			path = UIElements;
@@ -409,18 +422,6 @@
 			path = Expandable;
 			sourceTree = "<group>";
 		};
-		BC2896F212B44DBF00F24468 /* WebView */ = {
-			isa = PBXGroup;
-			children = (
-				BC2896F312B44DBF00F24468 /* JavaScriptHandler.h */,
-				BC2896F412B44DBF00F24468 /* JavaScriptHandler.m */,
-				BC2896F512B44DBF00F24468 /* JavaScriptLibrary.txt */,
-				BC2896F612B44DBF00F24468 /* JavaScriptManipulator.h */,
-				BC2896F712B44DBF00F24468 /* JavaScriptManipulator.m */,
-			);
-			path = WebView;
-			sourceTree = "<group>";
-		};
 		BC2896F812B44DBF00F24468 /* ZoomInputs */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,6 +438,15 @@
 				BC28970312B44DBF00F24468 /* ZoomTextView.m */,
 			);
 			path = ZoomInputs;
+			sourceTree = "<group>";
+		};
+		BC38BFF112CFE435007F340F /* GenericCommands */ = {
+			isa = PBXGroup;
+			children = (
+				BC38BFF212CFE450007F340F /* AlertCommand.h */,
+				BC38BFF312CFE450007F340F /* AlertCommand.m */,
+			);
+			path = GenericCommands;
 			sourceTree = "<group>";
 		};
 		BC86705F1299957B002CCB5E /* Models */ = {
@@ -459,8 +469,35 @@
 		BCAAF32112B05E6700F38535 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BCFF059412CFC2F3008D32DB /* CommandableWebView */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		BCFF056712CFC1B2008D32DB /* CommandableWebView */ = {
+			isa = PBXGroup;
+			children = (
+				BC38BFF112CFE435007F340F /* GenericCommands */,
+				BCFF056812CFC1B2008D32DB /* CommandableWebView.h */,
+				BCFF056A12CFC1B2008D32DB /* CommandableWebView.m */,
+				BCFF070B12CFD516008D32DB /* CommandableWebView.txt */,
+				BCFF056B12CFC1B2008D32DB /* WebCommand.h */,
+				BCFF056C12CFC1B2008D32DB /* WebCommand.m */,
+			);
+			path = CommandableWebView;
+			sourceTree = "<group>";
+		};
+		BCFF059412CFC2F3008D32DB /* CommandableWebView */ = {
+			isa = PBXGroup;
+			children = (
+				BCFF059512CFC2F3008D32DB /* TestCommandableWebViewController.h */,
+				BCFF059612CFC2F3008D32DB /* TestCommandableWebViewController.m */,
+				BCFF059712CFC2F3008D32DB /* TestCommandableWebViewController.xib */,
+				BCFF05A312CFC469008D32DB /* TestCommandableWebViewController.html */,
+				BCFF05D912CFC65B008D32DB /* PageWebCommand.h */,
+				BCFF05DA12CFC65B008D32DB /* PageWebCommand.m */,
+			);
+			path = CommandableWebView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -518,7 +555,9 @@
 				BC28972212B44DBF00F24468 /* QuickCustomObjectPropertyEditorController.xib in Resources */,
 				BC28972512B44DBF00F24468 /* QuickTextFieldPropertyEditorController.xib in Resources */,
 				BC28972712B44DBF00F24468 /* QuickTextViewPropertyEditorController.xib in Resources */,
-				BC28972B12B44DBF00F24468 /* JavaScriptLibrary.txt in Resources */,
+				BCFF059912CFC2F3008D32DB /* TestCommandableWebViewController.xib in Resources */,
+				BCFF05A412CFC469008D32DB /* TestCommandableWebViewController.html in Resources */,
+				BCFF070C12CFD516008D32DB /* CommandableWebView.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,13 +608,16 @@
 				BC28972612B44DBF00F24468 /* QuickTextViewPropertyEditorController.m in Sources */,
 				BC28972812B44DBF00F24468 /* ExpandableController.m in Sources */,
 				BC28972912B44DBF00F24468 /* MotionWindow.m in Sources */,
-				BC28972A12B44DBF00F24468 /* JavaScriptHandler.m in Sources */,
-				BC28972C12B44DBF00F24468 /* JavaScriptManipulator.m in Sources */,
 				BC28972D12B44DBF00F24468 /* ZoomBackgroundManager.m in Sources */,
 				BC28972E12B44DBF00F24468 /* ZoomInfo.m in Sources */,
 				BC28972F12B44DBF00F24468 /* ZoomTextDelegate.m in Sources */,
 				BC28973012B44DBF00F24468 /* ZoomTextField.m in Sources */,
 				BC28973112B44DBF00F24468 /* ZoomTextView.m in Sources */,
+				BCFF056E12CFC1B2008D32DB /* CommandableWebView.m in Sources */,
+				BCFF056F12CFC1B2008D32DB /* WebCommand.m in Sources */,
+				BCFF059812CFC2F3008D32DB /* TestCommandableWebViewController.m in Sources */,
+				BCFF05DB12CFC65B008D32DB /* PageWebCommand.m in Sources */,
+				BC38BFF412CFE450007F340F /* AlertCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

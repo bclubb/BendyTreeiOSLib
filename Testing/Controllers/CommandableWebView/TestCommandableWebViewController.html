@@ -1,0 +1,28 @@
+<html>
+  <head>
+  
+    <style type="text/css">
+        body {
+            background-color:#060;
+        }
+    </style>
+  
+  </head>
+  <body>
+      <a href="birdie://page/1234">birdie://page/1234</a><br />
+      
+      <input type="button" value="GO!!!" onclick="go();" />
+    
+      <script type="text/javascript">
+          function go()
+          {          
+              alert("window.AppCommander: "+window.AppCommander);
+          
+              //var exec = window.AppCommander.executor("birdie");
+              //exec('page',1234,'car/ride',['a'],{b:'c'}, function(x){ alert(x+1); });
+             
+          }
+      </script>
+    
+  </body>
+</html>

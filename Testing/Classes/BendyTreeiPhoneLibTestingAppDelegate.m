@@ -20,6 +20,7 @@
 #import "UIView+Position.h"
 
 #import "StringFormatting.h"
+#import "TestCommandableWebViewController.h"
 
 @implementation BendyTreeiPhoneLibTestingAppDelegate
 
@@ -128,6 +129,13 @@
     [window addSubview:navController.view];
 }
 
+- (void) testCommandableWebView
+{
+    TestCommandableWebViewController* controller = [[[TestCommandableWebViewController alloc] init] autorelease];
+    [controller.view setY:20];
+    [self.window addSubview:controller.view];
+}
+
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
@@ -135,7 +143,8 @@
     // Override point for customization after application launch.	
     [window makeKeyAndVisible];
 	
-    [self testEditor];    
+    //[self testEditor];  
+    [self testCommandableWebView];
     
 	return YES;
 }

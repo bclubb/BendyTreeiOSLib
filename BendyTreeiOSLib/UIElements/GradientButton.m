@@ -483,7 +483,7 @@
     point.y = (round(resolution * point.y + alignStroke) - alignStroke) / resolution;
     CGPathAddLineToPoint(path, NULL, point.x, point.y);
     CGPathCloseSubpath(path);
-    if (self.state == UIControlStateHighlighted)
+    if (self.state == UIControlStateHighlighted && NO)
         gradient = self.highlightGradient;
     else
         gradient = self.normalGradient;

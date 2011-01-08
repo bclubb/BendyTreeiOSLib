@@ -14,7 +14,7 @@
 
 @synthesize zoomInfo;
 
-- (id)initWithCoder:(NSCoder *)inCoder;
+- (id)initWithCoder:(NSCoder *)inCoder
 {
     self = [super initWithCoder:inCoder];
     if (self != nil) {
